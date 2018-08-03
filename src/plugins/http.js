@@ -53,6 +53,10 @@ function patch (http, tracer, config) {
         }
       })
 
+      // req.on('socket', socket => {
+      //   socket.on('close', () => {})
+      // })
+
       req.on('error', err => {
         span.addTags({
           'error.type': err.name,
