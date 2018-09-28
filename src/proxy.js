@@ -5,7 +5,6 @@ const memoize = require('lodash.memoize')
 const NoopTracer = require('./noop')
 const DatadogTracer = require('./tracer')
 const Config = require('./config')
-const Instrumenter = require('./instrumenter')
 const platform = require('./platform')
 const log = require('./log')
 
@@ -21,7 +20,6 @@ class Tracer extends BaseTracer {
   constructor () {
     super()
     this._tracer = noop
-    this._instrumenter = new Instrumenter(this)
     this._deprecate = memoize(method => log.debug([
       `tracer.${method}() is deprecated.`,
       'Please use tracer.startSpan() and tracer.scopeManager() instead.',
@@ -52,6 +50,9 @@ class Tracer extends BaseTracer {
         const config = new Config(options)
 
         if (config.enabled) {
+          const Instrumenter = require('./instrumenter')
+          this._instrumenter = new Instrumenter(this)
+
           platform.configure(config)
 
           this._tracer = new DatadogTracer(config)
