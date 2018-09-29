@@ -9,8 +9,10 @@ class DatadogTracer extends Tracer {
     let ScopeManager
 
     if (process.env.DD_CONTEXT_PROPAGATION === 'false') {
+      console.log("DD_CONTEXT_PROPAGATION = false skipping scope");
       ScopeManager = require('./scope/noop/scope_manager')
     } else {
+      console.log("DD_CONTEXT_PROPAGATION = true loading scope");
       ScopeManager = require('./scope/scope_manager')
     }
 

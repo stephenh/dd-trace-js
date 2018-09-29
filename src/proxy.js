@@ -50,6 +50,7 @@ class Tracer extends BaseTracer {
         const config = new Config(options)
 
         if (config.enabled) {
+          console.log("DD CONFIG ENABLED");
           const Instrumenter = require('./instrumenter')
           this._instrumenter = new Instrumenter(this)
 
@@ -57,6 +58,8 @@ class Tracer extends BaseTracer {
 
           this._tracer = new DatadogTracer(config)
           this._instrumenter.patch(config)
+        } else {
+          console.log("DD CONFIG DISABLED");
         }
       } catch (e) {
         log.error(e)

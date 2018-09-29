@@ -5,6 +5,8 @@ const Scope = require('./scope')
 const Context = require('./context')
 const ContextExecution = require('./context_execution')
 
+console.log("DD SCOPE MANAGER LOADED");
+
 let singleton = null
 
 /**

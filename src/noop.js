@@ -9,8 +9,10 @@ class NoopTracer extends Tracer {
     let ScopeManager
 
     if (process.env.DD_CONTEXT_PROPAGATION === 'false') {
+      console.log("NO DD_CONTEXT_PROPAGATION");
       ScopeManager = require('./scope/noop/scope_manager')
     } else {
+      console.log("LOADING DD_CONTEXT_PROPAGATION");
       ScopeManager = require('./scope/scope_manager')
     }
 

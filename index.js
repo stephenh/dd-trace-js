@@ -6,4 +6,6 @@ const TracerProxy = require('./src/proxy')
 
 platform.use(node)
 
+console.log("HER HER HER")
+
 module.exports = new TracerProxy()
